@@ -3,4 +3,5 @@ from solver import Solver
 
 
 if __name__ == "__main__":
-    print("Welcome to MAZE SOLVER")
+    maze = Maze("MazeSolver", (600, 600))
+    maze.start()
