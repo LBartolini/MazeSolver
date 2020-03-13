@@ -27,6 +27,7 @@ class Window:
 
         # Game attributes
         self.widgets = []
+        self.objects = {}
 
     def drawFPS(self):
         if self.show_fps:
@@ -37,12 +38,18 @@ class Window:
             self.window.blit(fps_text, (3, 3))
     
     def addWidget(self, widget):
+        widget.parent = self
         self.widgets.append(widget)
 
-    def removeWidget(self, widget):
-        for i, widg in enumerate(self.widgets):
-            if widg is widget:
-                self.widgets.pop(i)
+    def addObject(self, obj):
+        """
+        Objects need ID to be identified in the game
+        if you want to add a custom object to the game remember to add the id parameter (string is preferred)
+        if you want to add a generic object add the ID parameter as follows:
+            numpy.array.id = "id"
+        This way in python you can add attributes to objects at runtime
+        """
+        self.objects[obj.id] = obj
 
     def start(self):
         th = threading.Thread(target=self.run)
@@ -78,4 +85,3 @@ class Window:
             self.clock.tick(self.FPS_CAP)
 
         pygame.quit()
-
