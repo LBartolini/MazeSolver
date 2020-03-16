@@ -1,8 +1,10 @@
 import pygame
+from engine.widgets.widget import Widget
 
 
-class Label:
-    def __init__(self, coor, dim, text):
+class Label(Widget):
+    def __init__(self, coor, dim, text="Label"):
+        super().__init__()
         self.bgcolor = pygame.Color("white")
         self.to_display = pygame.Rect(coor, dim)
         self.dimension = dim
@@ -10,7 +12,7 @@ class Label:
         self.parent = None
 
         # Text
-        self.text = "Label"
+        self.text = text
         self.textColor = pygame.Color("black")
         self.text_percentage = 100  # percentage of the button rectangle height
         self.text_size = None
@@ -39,6 +41,3 @@ class Label:
                 px_to_pt = 12 / 16
                 button_text = pygame.font.SysFont("Arial", int(ratio * px_to_pt)).render(self.text, 1, self.textColor)
             win.blit(button_text, (self.to_display.x, self.to_display.y))
-
-    def checkEvent(self, event, *args):
-        pass

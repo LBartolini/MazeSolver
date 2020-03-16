@@ -1,8 +1,10 @@
 import pygame
+from engine.widgets.widget import Widget
 
 
-class Rect:
+class Rect(Widget):
     def __init__(self, coor, dim):
+        super().__init__()
         self.bgcolor = pygame.Color("white")
         self.to_display = pygame.Rect(coor, dim)
         self.dimension = dim
@@ -16,7 +18,8 @@ class Rect:
 
         # Event binding need argument self to be used properly
         self.eventsBindings = {
-                'onClick': None
+                'onClick': None,
+                'onKeyDown': None,
                 }
 
     def setBgColor(self, color):
@@ -49,5 +52,9 @@ class Rect:
         if event == 'onClick' and self.to_display.collidepoint(args):
             if callable(self.eventsBindings[event]):
                 self.eventsBindings[event](self, self.parent)
+        elif event == 'onKeyDown' and self.to_display.collidepoint(args[1:]): # args [key pressed, mouse coords]
+            if callable(self.eventsBindings[event]):
+                self.eventsBindings[event](self, self.parent, chr(args[0]))
+
 
 

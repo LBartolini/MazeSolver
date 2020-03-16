@@ -1,8 +1,10 @@
 import pygame
+from engine.widgets.widget import Widget
 
 
-class EventListener:
+class EventListener(Widget):
     def __init__(self):
+        super().__init__()
         # Window pointer
         self.parent = None
 
@@ -22,8 +24,4 @@ class EventListener:
                 self.eventsBindings[event](self, self.parent)
         elif event == 'onKeyDown':
             if callable(self.eventsBindings[event]):
-                self.eventsBindings[event](self, self.parent)
-
-    def draw(self, win):
-        # This method is here just for the window code which calls this function on every widget
-        pass
+                self.eventsBindings[event](self, self.parent, chr(args[0]))

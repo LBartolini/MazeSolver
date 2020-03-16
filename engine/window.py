@@ -41,18 +41,11 @@ class Window:
         widget.parent = self
         self.widgets.append(widget)
 
-    def addObject(self, obj):
-        """
-        Objects need ID to be identified in the game
-        if you want to add a custom object to the game remember to add the id parameter (string is preferred)
-        if you want to add a generic object add the ID parameter as follows:
-            numpy.array.id = "id"
-        This way in python you can add attributes to objects at runtime
-        """
-        self.objects[obj.id] = obj
+    def addObject(self, obj, identifier):
+        self.objects[identifier] = obj
 
     def start(self):
-        th = threading.Thread(target=self.run)
+        th = threading.Thread(target=self.run, daemon=True)
         th.start()
 
     def drawWidgets(self):
@@ -64,6 +57,9 @@ class Window:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 for widg in self.widgets:
                     widg.checkEvent('onClick', pygame.mouse.get_pos())
+            elif event.type == pygame.KEYDOWN:
+                for widg in self.widgets:
+                    widg.checkEvent('onKeyDown', event.key, pygame.mouse.get_pos())
 
     def run(self):
         pygame.init()
