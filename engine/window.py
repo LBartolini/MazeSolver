@@ -28,6 +28,7 @@ class Window:
         # Game attributes
         self.widgets = []
         self.objects = {}
+        self.clock_func = None # function that is called every frame
 
     def drawFPS(self):
         if self.show_fps:
@@ -75,6 +76,8 @@ class Window:
 
             # Events
             self.checkEvents()
+            if callable(self.clock_func):
+                self.clock_func()
 
             # Screen update and fps cap
             pygame.display.update()

@@ -55,11 +55,14 @@ class Maze:
 
 
 def function(self, win, key):
-    if key == ' ' and not win.objects["maze"].running:
+    if key == ' ' and not win.objects["maze"].running and win.objects["maze"].grid.exist_start_point() and win.objects["maze"].grid.exist_end_point():
+        win.objects["maze"].grid.updateMatrixWidg()
         win.objects["maze"].running = True
     elif key == ' ' and win.objects["maze"].running:
+        win.objects["maze"].grid.updateMatrixWidg()
         win.objects["maze"].running = False
     elif key == 'c':
         win.objects["maze"].grid.clear()
+        win.objects["maze"].grid.updateMatrixAi()
 
 
