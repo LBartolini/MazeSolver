@@ -27,18 +27,19 @@ class Maze:
     def setup(self):
         # Grid setup
         self.window.addWidget(self.grid)
+        self.grid.cell_maz_size = 15
         cellx, celly = self.grid.setup()
 
         # Draw Instuctions labels
-        label1 = Label((0, (celly*self.grid.cell_dim)+self.grid.cell_dim),
+        label1 = Label((0, (celly*self.grid.cell_dim)+100),
                        (self.window.dimension[1], self.grid.cell_dim),
                        "S start point, E end point,SPACE start simulation")
         label1.text_size = 25
         self.window.addWidget(label1)
 
-        label2 = Label((0, (celly * self.grid.cell_dim) + self.grid.cell_dim + 30),
+        label2 = Label((0, (celly * self.grid.cell_dim) + 150),
                        (self.window.dimension[1], self.grid.cell_dim),
-                       "C to clear the grid")
+                       "C to clear the grid, M_Sx to build walls")
         label2.text_size = 25
         self.window.addWidget(label2)
 

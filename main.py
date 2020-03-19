@@ -1,5 +1,5 @@
 from maze import Maze
-from solver import Solver
+from solver.solver import Solver
 import time
 from engine import MainLoop
 
@@ -20,10 +20,11 @@ def main():
     pass
 
 if __name__ == "__main__":
-    maze = Maze("MazeSolver", (600, 600))
-    maze.start()
+    maze = Maze("MazeSolver", (800, 900))
     maze.window.show_fps = True
+    maze.window.fps_perc = 4
     maze.window.FPS_CAP = 60
+    maze.start()
     main()
 
 
