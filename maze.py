@@ -14,6 +14,7 @@ class Maze:
         self.window.background_color = pygame.Color('white')
         self.id = "maze"
         self.running = False
+        self.ready_loading = False
 
         # Grid
         self.grid = Grid(dim, self.window)
@@ -39,7 +40,7 @@ class Maze:
 
         label2 = Label((0, (celly * self.grid.cell_dim) + 150),
                        (self.window.dimension[1], self.grid.cell_dim),
-                       "C to clear the grid, M_Sx to build walls")
+                       "C to clear the grid, M_Sx to build walls, L to load")
         label2.text_size = 25
         self.window.addWidget(label2)
 
@@ -53,6 +54,7 @@ class Maze:
     def start(self):
         self.window.start()
 
+# Function event listener
 
 def function(self, win, key):
     if key == ' ' and not win.objects["maze"].running and win.objects["maze"].grid.exist_start_point() and win.objects["maze"].grid.exist_end_point():
@@ -64,5 +66,8 @@ def function(self, win, key):
     elif key == 'c' and not win.objects["maze"].running:
         win.objects["maze"].grid.clear()
         win.objects["maze"].grid.updateMatrixAi()
+    elif key == 'l':
+        win.objects["maze"].ready_loading = not win.objects["maze"].ready_loading
+
 
 

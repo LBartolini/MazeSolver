@@ -30,8 +30,8 @@ class Grid(Widget):
         self.finish = False
         self.visited = [] # list containing tuples of coordinates of the cells already visited
         self.WALL_PENALTY = -2
-        self.MOVE_PENALTY = 0.05
-        self.VISITED_PENALTY = -0.05
+        self.MOVE_PENALTY = 0
+        self.VISITED_PENALTY = 0
         self.EXIT_FOUND = 20
         self.possible_moves = [0, 1, 2, 3] # 0 = UP, 1 = RIGHT, 2 = DOWN, 3 = LEFT
 
@@ -52,8 +52,8 @@ class Grid(Widget):
                     self.matrix_ai[r][c] = "E"
                     self.end_point = [r, c]
 
-    def updateMatrixWidg(self):
-        if self.window.objects["maze"].running:
+    def updateMatrixWidg(self, *args):
+        if self.window.objects["maze"].running or len(args) > 0:
             for r, row in enumerate(self.matrix_ai):
                 for c, cell in enumerate(row):
                     if [r, c] == self.state:
@@ -65,6 +65,7 @@ class Grid(Widget):
                             self.matrix_widg[r][c].bgcolor = pygame.Color("red")
                         elif cell == b'S':
                             self.matrix_widg[r][c].bgcolor = pygame.Color("green")
+                            self.start_point = [r, c]
                         else:
                             self.matrix_widg[r][c].bgcolor = pygame.Color("black")
 
