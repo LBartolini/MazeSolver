@@ -61,7 +61,7 @@ def function(self, win, key):
     elif key == ' ' and win.objects["maze"].running:
         win.objects["maze"].grid.updateMatrixWidg()
         win.objects["maze"].running = False
-    elif key == 'c':
+    elif key == 'c' and not win.objects["maze"].running:
         win.objects["maze"].grid.clear()
         win.objects["maze"].grid.updateMatrixAi()
 

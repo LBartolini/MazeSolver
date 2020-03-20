@@ -84,6 +84,14 @@ class Grid(Widget):
             for cell in row:
                 cell.checkEvent(event, *args)
 
+    def display_path(self, path):
+        for r, row in enumerate(self.matrix_widg):
+            for c, cell in enumerate(row):
+                if self.matrix_ai[r][c] == b'E':
+                    cell.bgcolor = pygame.Color("red")
+                if [r, c] in path and self.matrix_ai[r][c] != b'S' and self.matrix_ai[r][c] != b'E':
+                    cell.bgcolor = pygame.Color("blue")
+
     def setup(self):
         # Setup grid size
         if self.cell_maz_size is not None and self.cells > self.cell_maz_size:
